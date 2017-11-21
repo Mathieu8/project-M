@@ -37,4 +37,9 @@ public class ToSave {
 	public String returnTijd() {
 		return tijd;
 	}
+
+	public void save() {
+		
+		
+	}
 }
