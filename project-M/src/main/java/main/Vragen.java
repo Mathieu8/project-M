@@ -22,20 +22,24 @@ public class Vragen {
 		} catch (IOException e) {
 			System.out.println("Error");// niet goed als je hier komt
 		}
-		String timeStamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
-		save.setTijd(timeStamp); // opslaan van de tijd
-		System.out.println("Emoties is = " + save.returnEmoties());
-		System.out.println("activiteit is = " + save.returnActiviteit());
-		System.out.println("opmerking is = " + save.returnOpmerking());
-		System.out.println("tijd is = " + save.returnTijd());
+		String timeStamp = new SimpleDateFormat("yyyyMMdHHmmss").format(new Date());
+		// de tijd is opgeslagen als jaar maand dag uur minuut seconde
+		String dagVanDeWeek = new SimpleDateFormat("EEEE u").format(new Date());
+		// slaat een string op met de naam en de number van de dag van de week
+		save.setTijd(timeStamp, dagVanDeWeek); // opslaan van de tijd
+		System.out.println("Emoties is " + save.returnEmoties());
+		System.out.println("activiteit is " + save.returnActiviteit());
+		System.out.println("opmerking is " + save.returnOpmerking());
+		System.out.println("tijd is " + save.returnTijd());
+		System.out.println("dag van de week is " + save.returnDag());
 		save.save(); // opslaan in een bestandje
 	}
 
 	public void emoties() throws IOException {
 		System.out.println("voer U emotie in, U heeft de keuze uit: ");
 		System.out.println("1) blij 2) boos 3) bang 4) bedroefd 5) beschaamde");
-		String tempString = emotiesEnActiviteiten();
-		save.setEmoties(tempString);
+		String gebruikerInput = emotiesEnActiviteiten();
+		save.setEmoties(gebruikerInput);
 		/*
 		 * als eerste wat tekst om uit te leggen wat je aan het doen bent daarna krijg
 		 * je een tempString, die 1,2,3,4 of 5 als waarde heeft daarna sla je die op in
@@ -46,8 +50,8 @@ public class Vragen {
 	public void activiteit() throws IOException {
 		System.out.println("voer U activiteit in, U heeft de keuze uit: ");
 		System.out.println("1) werk 2) sociaal 3) sporten 4) relaxen 5) reizen");
-		String tempString = emotiesEnActiviteiten();
-		save.setActiviteit(tempString);
+		String gebruikerInput = emotiesEnActiviteiten();
+		save.setActiviteit(gebruikerInput);
 		/*
 		 * als eerste wat tekst om uit te leggen wat je aan het doen bent daarna krijg
 		 * je een tempString, die 1,2,3,4 of 5 als waarde heeft daarna sla je die op in
@@ -57,12 +61,10 @@ public class Vragen {
 
 	public void opmerking() throws IOException {
 		System.out.println("Opmerkingen:");
-		String string = "";
-		boolean tempBoolean = true;
-		while (tempBoolean) {
-			string = getString();
-			if (string.length() < 140) {
-				tempBoolean = false;
+		String gebruikerInput = "";
+		while (true) {
+			gebruikerInput = getString();
+			if (gebruikerInput.length() < 140) {
 				break;
 				/*
 				 * stap 1 vraag van de gebruiker een invoer stap 2 controleer of de input langer
@@ -72,16 +74,14 @@ public class Vragen {
 			}
 			System.out.println("graag een opmerking in minder dan 140 tekens");
 		}
-		save.setOpmerking(string);
+		save.setOpmerking(gebruikerInput);
 	}
 
 	public String emotiesEnActiviteiten() throws IOException {
-		boolean tempBoolean = true;
-		String tempSTring = "";
-		while (tempBoolean) {
-			tempSTring = getString(); // vraagt een string van de gebruier
-			if ((tempSTring.length() == 1) & (goedNumbers.contains(tempSTring))) {
-				tempBoolean = false;
+		String gebruikerInput = "";
+		while (true) {
+			gebruikerInput = getString(); // vraagt een string van de gebruier
+			if ((gebruikerInput.length() == 1) && (goedNumbers.contains(gebruikerInput))) {
 				break;
 				/*
 				 * stap 1 vraag aan de gebruiker een invoer stap 2 controleer of de input een
@@ -91,14 +91,13 @@ public class Vragen {
 			}
 			System.out.println("s.v.p. een getal tussen de 1 en de 5.");
 		}
-		return tempSTring;
+		return gebruikerInput;
 	}
 
 	public static String getString() throws IOException {
 		InputStreamReader isr = new InputStreamReader(System.in);
 		BufferedReader br = new BufferedReader(isr);
-		String s = br.readLine();
-		return s;
+		return br.readLine();
 		/*
 		 * een method om elke keer van de gebruiker iets te vragen
 		 * 

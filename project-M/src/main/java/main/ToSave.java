@@ -1,10 +1,13 @@
 package main;
 
 public class ToSave {
+	database.DatabaseServer save = new database.DatabaseServer();
 	String emoties;
 	String activiteit;
 	String opmerking;
 	String tijd;
+	String dagVanDeWeek;
+	
 	
 	public void setEmoties(String temp) {
 		emoties = temp;
@@ -18,8 +21,9 @@ public class ToSave {
 		opmerking = temp;
 	}
 	
-	public void setTijd(String temp) {
-		tijd = temp;
+	public void setTijd(String t,String dag) {
+		tijd = t;
+		dagVanDeWeek = dag;
 	}
 	
 	public String returnEmoties() {
@@ -38,8 +42,15 @@ public class ToSave {
 		return tijd;
 	}
 
+	public String returnDag() {
+		return dagVanDeWeek;
+	}
+	
 	public void save() {
-		
-		
+		save.setEmoties(emoties);
+		save.setActiviteit(activiteit);
+		save.setOpmerking(opmerking);
+		save.setTijd(tijd,dagVanDeWeek);
+		save.save();
 	}
 }
