@@ -7,6 +7,7 @@ public class ToSave {
 	String opmerking;
 	String tijd;
 	String dagVanDeWeek;
+	int duration;
 	
 	
 	public void setEmoties(String temp) {
@@ -21,9 +22,11 @@ public class ToSave {
 		opmerking = temp;
 	}
 	
-	public void setTijd(String t,String dag) {
+	public void setTijd(String t,String dag, int tempDuration) {
 		tijd = t;
 		dagVanDeWeek = dag;
+		duration = tempDuration;
+		
 	}
 	
 	public String returnEmoties() {
@@ -50,7 +53,7 @@ public class ToSave {
 		save.setEmoties(emoties);
 		save.setActiviteit(activiteit);
 		save.setOpmerking(opmerking);
-		save.setTijd(tijd,dagVanDeWeek);
+		save.setTijd(tijd,dagVanDeWeek, duration);
 		save.save();
 	}
 }

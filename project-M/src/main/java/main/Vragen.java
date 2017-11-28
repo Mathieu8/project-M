@@ -11,6 +11,8 @@ public class Vragen {
 	String goedNumbers = "12345";
 
 	public void runQuestions() {
+		int startTime = (int) System.currentTimeMillis();
+		//methodToTime();
 		try {
 			emoties();
 			activiteit();
@@ -22,16 +24,19 @@ public class Vragen {
 		} catch (IOException e) {
 			System.out.println("Error");// niet goed als je hier komt
 		}
-		String timeStamp = new SimpleDateFormat("yyyyMMdHHmmss").format(new Date());
+		int endTime = (int) System.currentTimeMillis();
+		int duration = (endTime - startTime)/1000;  //divide by 1000000 to get milliseconds.
+		String timeStamp = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(new Date());
 		// de tijd is opgeslagen als jaar maand dag uur minuut seconde
-		String dagVanDeWeek = new SimpleDateFormat("EEEE u").format(new Date());
+		String dagVanDeWeek = new SimpleDateFormat("u EEEE").format(new Date());
 		// slaat een string op met de naam en de number van de dag van de week
-		save.setTijd(timeStamp, dagVanDeWeek); // opslaan van de tijd
+		save.setTijd(timeStamp, dagVanDeWeek,duration); // opslaan van de tijd
 		System.out.println("Emoties is " + save.returnEmoties());
 		System.out.println("activiteit is " + save.returnActiviteit());
 		System.out.println("opmerking is " + save.returnOpmerking());
 		System.out.println("tijd is " + save.returnTijd());
 		System.out.println("dag van de week is " + save.returnDag());
+		System.out.println("snelheid van invoeren is " + duration);
 		save.save(); // opslaan in een bestandje
 	}
 
