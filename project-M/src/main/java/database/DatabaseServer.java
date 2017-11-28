@@ -33,6 +33,10 @@ public class DatabaseServer {
 			for(int i=0;i<6;i++) {
 				String temp = save[i];
 				System.out.println(temp);
+				/* een of andere method( int i, String temp)
+				 * die de string temp opslaat op kolum i+1 en de tij waar we zijn gebleven
+				 * als het hier mee klaar is de rijnummer een omhoog gooit 
+				 */
 				
 			}
 
