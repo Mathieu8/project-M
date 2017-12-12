@@ -29,8 +29,15 @@ dependencies {
 
     //apache poi to allow writing into excell sheets
 	// https://mvnrepository.com/artifact/org.apache.poi/poi
-	compile group: 'org.apache.poi', name: 'poi', version: '3.9'
-	 runtime 'org.apache.poi:poi-ooxml:3.14'
+	compile group: 'org.apache.poi', name: 'poi', version: '3.17'
+	//compile group: 'org.apache.poi', name: 'poi', version: '3.9'
+	  runtime 'org.apache.poi:poi-ooxml:3.14'
+	  
+	   // https://mvnrepository.com/artifact/org.apache.poi/ooxml-schemas
+compile group: 'org.apache.poi', name: 'ooxml-schemas', version: '1.1'
+
+ // https://mvnrepository.com/artifact/org.apache.poi/poi-ooxml
+compile group: 'org.apache.poi', name: 'poi-ooxml', version: '3.9'
 	
     // Use JUnit test framework
     testImplementation 'junit:junit:4.12'

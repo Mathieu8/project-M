@@ -1,24 +1,24 @@
 package database;
 
 public class DatabaseServer {
-	String[] save = new String[6];
+	String[] data = new String[6];
 
 	public void setEmoties(String temp) {
-		save[0] = temp;
+		data[0] = temp;
 	}
 
 	public void setActiviteit(String temp) {
-		save[1] = temp;
+		data[1] = temp;
 	}
 
 	public void setOpmerking(String temp) {
-		save[2] = temp;
+		data[2] = temp;
 	}
 
 	public void setTijd(String t, String dag, int duration) {
-		save[3] = t;
-		save[4] = dag;
-		save[5] = Integer.toString(duration);
+		data[3] = t;
+		data[4] = dag;
+		data[5] = Integer.toString(duration);
 	}
 
 	public void save() {
@@ -30,8 +30,12 @@ public class DatabaseServer {
 		 * kan opslaan
 		 */
 		if (check()) {
+			Save save = new Save();
+			save.intialize();
+			save.save(data);
+			
 			for(int i=0;i<6;i++) {
-				String temp = save[i];
+				String temp = data[i];
 				System.out.println(temp);
 				/* een of andere method( int i, String temp)
 				 * die de string temp opslaat op kolum i+1 en de tij waar we zijn gebleven
@@ -48,38 +52,38 @@ public class DatabaseServer {
 	}
 
 	public boolean check() {
-		if (!(save[0].length() == 1 && "12345".contains(save[0]))) {
+		if (!(data[0].length() == 1 && "12345".contains(data[0]))) {
 			return false;
 		}
-		if (!(save[1].length() == 1 && "12345".contains(save[1]))) {
+		if (!(data[1].length() == 1 && "12345".contains(data[1]))) {
 			return false;
 		}
-		if (save[2].length() >= 140) {
+		if (data[2].length() >= 140) {
 			return false;
 		}
 
-		if (save[3].length() == 19) {
+		if (data[3].length() == 19) {
 			for (int i = 0; i < 19; i++) {
 				switch (i) {
 				case 2:
 				case 5:
-					if (save[3].charAt(i) != '/') {
+					if (data[3].charAt(i) != '/') {
 						return false;
 					}
 					break;
 				case 10:
-					if (save[3].charAt(i) != ' ') {
+					if (data[3].charAt(i) != ' ') {
 						return false;
 					}
 					break;
 				case 13:
 				case 16:
-					if (save[3].charAt(i) != ':') {
+					if (data[3].charAt(i) != ':') {
 						return false;
 					}
 					break;
 				default:
-					if (!"0123456789".contains(Character.toString(save[3].charAt(i)))) {
+					if (!"0123456789".contains(Character.toString(data[3].charAt(i)))) {
 						return false;
 					}
 				}
@@ -88,36 +92,30 @@ public class DatabaseServer {
 		} 
 
 		{
-			if (save[4].length() == 8) {
-				if (save[4].charAt(0) != '1') {
-					return false;
-				} else if (save[4].charAt(0) != '5') {
-					return false;
-				} else if (save[4].charAt(0) != '7') {
+			if (data[4].length() == 8) {
+				if ("157".indexOf(data[4].charAt(0)) == -1) {
 					return false;
 				}
 			}
-			if (save[4].length() == 9) {
-				if (save[4].charAt(0) != '2') {
+			if (data[4].length() == 9) {
+				if (data[4].charAt(0) != '2') {
 					return false;
 				}
 			}
-			if (save[4].length() == 10) {
-				if (save[4].charAt(0) != '4') {
-					return false;
-				} else if (save[4].charAt(0) != '6') {
+			if (data[4].length() == 10) {
+				if ("46".indexOf(data[4].charAt(0)) == -1) {
 					return false;
 				}
 			}
-			if (save[4].length() == 11) {
-				if (save[4].charAt(0) != '3') {
+			if (data[4].length() == 11) {
+				if (data[4].charAt(0) != '3') {
 					return false;
 				}
 			}
 		}
 
-		for (int i = 0; i < save[5].length(); i++) {
-			if (!"1234567890".contains(Character.toString(save[5].charAt(i)))) {
+		for (int i = 0; i < data[5].length(); i++) {
+			if (!"1234567890".contains(Character.toString(data[5].charAt(i)))) {
 				return false;
 			}
 		}
